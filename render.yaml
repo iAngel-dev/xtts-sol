@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: xtts-sol
+    env: python
+    buildCommand: pip install -r requirements.txt && pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+    startCommand: python3 app.py
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10
+    plan: free
+    region: oregon
+    numInstances: 1
+    disk:
+      name: xtts-vol
+      mountPath: /app
+      sizeGB: 1
+    ports:
+      - port: 8020
+        protocol: http
