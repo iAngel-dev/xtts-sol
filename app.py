@@ -1,10 +1,15 @@
 import gradio as gr
-import time
+import tempfile
+import os
 
 def speak(text):
-    return "https://upload.wikimedia.org/wikipedia/commons/4/45/Example.ogg"
+    # Simule un fichier audio temporaire silencieux (placeholder XTTS)
+    temp_audio = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
+    temp_audio.write(b"\0" * 10000)
+    temp_audio.close()
+    return temp_audio.name
 
-iface = gr.Interface(fn=speak, 
+iface = gr.Interface(fn=speak,
                      inputs=gr.Textbox(lines=2, placeholder="Écris ici pour que Sol parle..."),
                      outputs="audio",
                      title="Sol vocal",
